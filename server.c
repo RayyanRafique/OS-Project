@@ -1,8 +1,9 @@
 #include "server.h"
 #include "common.h"
-#include "queue.h"
+#include "work_queue.h"
 #include "threadpool.h"
 #include "workerpool.h"
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,8 +27,8 @@ void start_server() {
         exit(EXIT_FAILURE);
     }
 
-    Queue work_queue;
-    queue_init(&work_queue, QUEUE_CAPACITY);
+    work_queue_t work_queue;
+    work_queue_init(&work_queue);
 
     WorkerThreadPool worker_pool;
     worker_pool_init(&worker_pool, 4, &work_queue); // use kro isko worker thread ky liye
