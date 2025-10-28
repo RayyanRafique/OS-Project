@@ -11,4 +11,7 @@
 // client queue capacity
 #define QUEUE_CAPACITY 16
 
+#define WORKER_THREAD_COUNT 4
+
+
 #endif
