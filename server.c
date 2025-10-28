@@ -2,6 +2,7 @@
 #include "common.h"
 #include "queue.h"
 #include "threadpool.h"
+#include "workerpool.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +25,12 @@ void start_server() {
         perror("socket failed");
         exit(EXIT_FAILURE);
     }
+
+    Queue work_queue;
+    queue_init(&work_queue, QUEUE_CAPACITY);
+
+    WorkerThreadPool worker_pool;
+    worker_pool_init(&worker_pool, 4, &work_queue); // use kro isko worker thread ky liye
 
     address.sin_family = AF_INET;
     address.sin_addr.s_addr = INADDR_ANY;
